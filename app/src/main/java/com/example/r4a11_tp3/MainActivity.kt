@@ -60,8 +60,8 @@ fun AppNavigation() {
             FormScreen(navController = navController)
         }
         composable(
-            route = "display/{name}",
-            arguments = listOf(navArgument("name") { defaultValue = "" })
+            route = "display/{name}/{age}",
+            arguments = listOf(navArgument("name") {defaultValue = ""}, navArgument("age") { defaultValue = "" })
         ){ backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
             val age = backStackEntry.arguments?.getString("age") ?: ""
@@ -121,7 +121,7 @@ fun FormScreen(navController: NavController){
                 .fillMaxWidth()
                 .padding(16.dp)
         )
-        Button(onClick = { navController.navigate("display/$name") }) {
+        Button(onClick = { navController.navigate("display/$name/$age") }) {
             Text(text = "Valider")
         }
         Button(onClick = { navController.popBackStack() }) {
