@@ -56,6 +56,9 @@ fun AppNavigation() {
         composable("from") {
             FormScreen(navController = navController)
         }
+        composable("affForm"){
+            AffFormScreen(navController = navController)
+        }
     }
 }
 
@@ -86,20 +89,44 @@ fun FormScreen(navController: NavController){
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Text(text = "Page du formulaire.",
-            style = MaterialTheme.typography.titleMedium)
+    ) {
+        Text(
+            text = "Page du formulaire.",
+            style = MaterialTheme.typography.titleMedium
+        )
         Spacer(modifier = Modifier.height(24.dp))
-        Button(onClick = { navController.popBackStack() }) {
-            Text(text = "Retour")
-        }
-    }
-    TextField(
-        value = name,
+        TextField(
+                value = name,
         onValueChange = { newText -> name = newText },
         label = { Text("Entrez votre nom") },
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-    )
+        )
+        Button(onClick = { navController.navigate("affForm") }) {
+            Text(text = "Valider")
+        }
+        Button(onClick = { navController.popBackStack() }) {
+            Text(text = "Retour")
+        }
+    }
+}
+
+@Composable
+fun AffFormScreen(navController : NavController) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Affichage du formulaire",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Button(onClick = { navController.popBackStack() }) {
+            Text(text = "Retour")
+        }
+    }
 }
